@@ -51,8 +51,8 @@ A aplicação foi desenvolvida seguindo as melhores práticas de mercado para qu
 
 ### 1. Clone o repositório
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
-cd <NOME_DA_PASTA_DO_PROJETO>
+git clone https://github.com/JoseOtavioJunqueira/desafio-itau-backend.git
+cd desafio-itau-backend
 ```
 
 ### 2. Construa o projeto com Maven
@@ -79,4 +79,5 @@ docker run -p 8080:8080 itau-desafio-api
 ## 🔗 Acessando a API
 
 - **Swagger UI (Documentação Interativa)**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
 - **Health Check**: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
