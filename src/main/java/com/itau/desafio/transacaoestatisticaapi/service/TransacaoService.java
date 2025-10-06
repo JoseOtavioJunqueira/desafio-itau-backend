@@ -7,14 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor // Cria um construtor com os campos 'final' (injeção de dependência)
+@RequiredArgsConstructor // injeção de dependência
 public class TransacaoService {
 
     private final TransacaoRepository transacaoRepository;
 
     public void registrarTransacao(TransacaoRequest transacao) {
-        // Validações de negócio complexas poderiam entrar aqui.
-        // Neste caso, as validações de DTO já cobrem o necessário.
         transacaoRepository.salvar(transacao);
     }
 

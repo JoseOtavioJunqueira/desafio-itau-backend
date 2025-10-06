@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Repository
 public class TransacaoRepository {
 
-    // Estrutura de dados thread-safe, ideal para cenários de alta leitura e baixa escrita/remoção.
+    // usando uma estrutura thread-safe, ideal para cenários de alta leitura e baixa escrita/remoção.
     private final List<TransacaoRequest> transacoes = new CopyOnWriteArrayList<>();
 
     public void salvar(TransacaoRequest transacao) {
@@ -17,7 +17,7 @@ public class TransacaoRepository {
     }
 
     public List<TransacaoRequest> buscarTodas() {
-        return List.copyOf(transacoes); // Retorna uma cópia imutável para segurança
+        return List.copyOf(transacoes); //vai retornar uma cópia imutável por segurança
     }
 
     public void limpar() {

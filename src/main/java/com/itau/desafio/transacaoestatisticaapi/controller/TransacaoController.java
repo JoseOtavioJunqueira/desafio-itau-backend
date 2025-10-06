@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/transacao")
 @RequiredArgsConstructor
-@Slf4j // Para o extra de Logs
+@Slf4j // para o extra de Logs
 public class TransacaoController {
 
     private final TransacaoService transacaoService;
