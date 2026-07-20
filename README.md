@@ -1,83 +1,84 @@
-# Desafio Backend Itaú - API de Transações e Estatísticas
+# Itaú Backend Challenge — Transactions & Statistics API
 
 ![Java](https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=for-the-badge&logo=spring)
 ![Maven](https://img.shields.io/badge/Maven-4.0-red?style=for-the-badge&logo=apache-maven)
 ![Docker](https://img.shields.io/badge/Docker-gray?style=for-the-badge&logo=docker)
 
-## 🎯 Objetivo
+## 🎯 Goal
 
-Este projeto é a minha solução para o **Desafio de Programação para a área de Backend do Itaú Unibanco**. O objetivo foi construir uma API REST de alta performance para registrar transações financeiras e retornar estatísticas em tempo real, com todos os dados armazenados exclusivamente em memória.
+This is my solution to **Itaú Unibanco's backend programming challenge**. The goal was to build a high-performance REST API that records financial transactions and returns real-time statistics, with all data stored exclusively in memory.
 
-A aplicação foi desenvolvida seguindo as melhores práticas de mercado para qualidade de código, arquitetura de software e manutenibilidade, visando criar uma solução robusta e profissional.
+The application follows industry best practices for code quality, software architecture, and maintainability, aiming for a robust, production-grade solution rather than a minimal pass on the requirements.
 
-## ✨ Features Implementadas
+The original challenge brief (in Portuguese) is kept as [`desafio.md`](desafio.md) for reference.
 
-### ✔️ Requisitos Obrigatórios
-- **`POST /transacao`**: Endpoint para receber e validar novas transações.
-  - Retorna **201 Created** para sucesso.
-  - Retorna **422 Unprocessable Entity** para transações com regras de negócio inválidas (valor negativo, data futura).
-  - Retorna **400 Bad Request** para JSONs malformados.
-- **`DELETE /transacao`**: Endpoint que apaga todas as transações armazenadas.
-  - Retorna **200 OK** para sucesso.
-- **`GET /estatistica`**: Endpoint que calcula e retorna as estatísticas (`count`, `sum`, `avg`, `min`, `max`) de todas as transações ocorridas nos últimos 60 segundos.
-  - A lógica é otimizada para ser performática, mesmo com um grande volume de dados.
-- **Armazenamento 100% em Memória**: Nenhuma dependência de banco de dados ou cache externo, utilizando estruturas de dados thread-safe para garantir a integridade em um ambiente com múltiplas requisições simultâneas.
+## ✨ Implemented Features
 
-### 🚀 Recursos Adicionais (Extras)
-- **[x] 🧪 Testes Automatizados**: Cobertura de testes unitários (com Mockito) para a lógica de negócio e testes de integração (com MockMvc) para os endpoints da API, garantindo a confiabilidade da aplicação.
-- **[x] 🐳 Containerização com Docker**: A aplicação está totalmente containerizada, incluindo um `Dockerfile` otimizado para build e execução, facilitando o deploy em qualquer ambiente.
-- **[x] 📜 Logs Detalhados**: Implementação de logs com SLF4J para rastrear as operações da API, facilitando o monitoramento e a depuração.
-- **[x] ❤️ Observabilidade (Health Check)**: Uso do Spring Boot Actuator para expor um endpoint `/actuator/health`, permitindo a verificação da saúde da aplicação.
-- **[x]  elegantly Tratamento de Erros**: Criação de um `GlobalExceptionHandler` para padronizar e tratar erros de forma elegante, retornando os status HTTP corretos sem expor detalhes internos do sistema.
-- **[x] 📚 Documentação da API (Swagger)**: A API é autodocumentada utilizando o padrão OpenAPI (Swagger), fornecendo uma interface interativa para explorar e testar os endpoints.
-- **[x] ⚙️ Configuração Externalizada**: O intervalo de tempo para o cálculo das estatísticas (padrão de 60 segundos) pode ser facilmente alterado através do arquivo `application.properties`, sem a necessidade de recompilar o código.
+### ✔️ Core Requirements
+- **`POST /transacao`**: receives and validates new transactions.
+  - Returns **201 Created** on success.
+  - Returns **422 Unprocessable Entity** for business-rule violations (negative amount, future date).
+  - Returns **400 Bad Request** for malformed JSON.
+- **`DELETE /transacao`**: clears all stored transactions.
+  - Returns **200 OK** on success.
+- **`GET /estatistica`**: computes and returns statistics (`count`, `sum`, `avg`, `min`, `max`) for all transactions from the last 60 seconds.
+  - Optimized to stay performant even under a high volume of transactions.
+- **100% in-memory storage**: no database or external cache dependency — thread-safe data structures guarantee integrity under concurrent requests.
 
-## 🛠️ Tecnologias Utilizadas
-- **Linguagem**: Java 17
+### 🚀 Extras
+- **🧪 Automated tests**: unit tests (Mockito) for business logic and integration tests (MockMvc) for the API endpoints.
+- **🐳 Dockerized**: fully containerized, with an optimized `Dockerfile` for build and run, ready to deploy anywhere.
+- **📜 Structured logging**: SLF4J logging across the API for easier monitoring and debugging.
+- **❤️ Observability**: Spring Boot Actuator exposes a `/actuator/health` endpoint.
+- **🛡️ Centralized error handling**: a `GlobalExceptionHandler` standardizes error responses and returns the correct HTTP status without leaking internal details.
+- **📚 API documentation**: self-documented via OpenAPI (Swagger), with an interactive UI to explore and test endpoints.
+- **⚙️ Externalized configuration**: the statistics time window (default: 60 seconds) is configurable via `application.properties`, no recompilation needed.
+
+## 🛠️ Tech Stack
+- **Language**: Java 17
 - **Framework**: Spring Boot 3
-- **Build Tool**: Maven
-- **Testes**: JUnit 5, Mockito
-- **Documentação**: Springdoc OpenAPI (Swagger)
+- **Build tool**: Maven
+- **Testing**: JUnit 5, Mockito
+- **Docs**: Springdoc OpenAPI (Swagger)
 - **Container**: Docker
-- **Outros**: Lombok, Spring Web, Spring Validation, Spring Actuator
+- **Other**: Lombok, Spring Web, Spring Validation, Spring Actuator
 
-## 🚀 Como Executar o Projeto
+## 🚀 Running the Project
 
-### Pré-requisitos
+### Prerequisites
 - JDK 17
 - Maven 3.8+
-- Docker (Opcional)
+- Docker (optional)
 
-### 1. Clone o repositório
+### 1. Clone the repository
 ```bash
 git clone https://github.com/JoseOtavioJunqueira/desafio-itau-backend.git
 cd desafio-itau-backend
 ```
 
-### 2. Construa o projeto com Maven
+### 2. Build with Maven
 ```bash
 ./mvnw clean package
 ```
 
-### 3. Execute a aplicação
+### 3. Run the application
 
-**Opção A: Localmente via Java**
+**Option A: Locally via Java**
 ```bash
 java -jar target/transacao-estatistica-api-0.0.1-SNAPSHOT.jar
 ```
 
-**Opção B: Via Docker**
+**Option B: Via Docker**
 ```bash
-# Construa a imagem Docker
+# Build the image
 docker build -t itau-desafio-api .
 
-# Rode o container
+# Run the container
 docker run -p 8080:8080 itau-desafio-api
 ```
 
-## 🔗 Acessando a API
+## 🔗 Accessing the API
 
-- **Swagger UI (Documentação Interativa)**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
-- **Health Check**: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Health check**: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
